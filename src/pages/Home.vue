@@ -2,8 +2,8 @@
   <TemplateSection class="content">
     <div class="text-container">
       <h1>
-        Tech Lead apasionado por los retos y el humor bien
-        codificado.
+        Tech Lead apasionado por los retos y <span class="highlight">el humor bien
+          codificado.</span>
       </h1>
     </div>
   </TemplateSection>
@@ -37,6 +37,8 @@ h1 {
 .text-container {
   max-width: 60vw;
   margin: 0 auto;
-  font-weight-bold: 700;
+}
+.highlight {
+  color: #BFAE96;
 }
 </style>
