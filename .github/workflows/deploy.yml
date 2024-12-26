@@ -24,8 +24,3 @@ jobs:
         with:
           branch: master
           folder: dist
-		
-
-	
-		
-
