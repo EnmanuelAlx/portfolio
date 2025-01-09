@@ -1,17 +1,19 @@
 import './assets/main.css'
 
 import { createApp } from 'vue'
-
+import { loadSlim } from '@tsparticles/slim'
+import { primaryColor, secondaryColor } from '@/constants'
+import Particles from '@tsparticles/vue3'
 import App from './App.vue'
+let app = createApp(App)
 
-createApp(App).mount('#app')
+document.documentElement.style.setProperty('--primary-color', primaryColor)
+document.documentElement.style.setProperty('--secondary-color', secondaryColor)
 
-// document.addEventListener('wheel', (event) => {
-//   const app = document.getElementById('app')
-//   const scrollAmount = window.innerHeight
-//   if (event.deltaY > 0) {
-//     app.scrollBy({ top: scrollAmount, behavior: 'smooth' })
-//   } else {
-//     app.scrollBy({ top: -scrollAmount, behavior: 'smooth' })
-//   }
-// })
+app
+  .use(Particles, {
+    init: async (engine) => {
+      await loadSlim(engine)
+    },
+  })
+  .mount('#app')
