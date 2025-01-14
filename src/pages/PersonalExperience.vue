@@ -1,6 +1,6 @@
 <template>
-  <TemplateSection>
-    <div class="content">
+  <TemplateSection class="container">
+    <div>
       <h1>Personal experience</h1>
       <p>This is an example page using the TemplateSection component.</p>
     </div>
@@ -19,7 +19,7 @@ export default {
 </script>
 
 <style scoped>
-.content {
+.container {
   background-color: purple;
 }
 </style>

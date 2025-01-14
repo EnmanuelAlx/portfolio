@@ -1,5 +1,5 @@
 <template>
-  <TemplateSection class="content">
+  <TemplateSection class="container">
     <div><vue-particles id="particles" :options="particleConfig" /></div>
     <div class="text-container">
       <h1>
@@ -92,7 +92,7 @@ export default {
 h1 {
   font-size: 4rem;
 }
-.content {
+.container {
   height: 100vh;
   align-content: center;
   display: grid;
