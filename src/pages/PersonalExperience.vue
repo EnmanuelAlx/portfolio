@@ -1,17 +1,14 @@
 <template>
   <TemplateSection class="experience-container">
     <h1>Mi Experiencia Profesional</h1>
-    
-    <!-- Timeline con Grid -->
+
     <div class="timeline-grid">
-      <!-- Línea central vertical -->
       <div class="center-line">
         <div class="end-dot"></div>
       </div>
-      
-      <!-- Elementos de la timeline en grid -->
-      <div 
-        v-for="(job, index) in jobs" 
+
+      <div
+        v-for="(job, index) in jobs"
         :key="index"
         :class="['grid-item', index % 2 === 0 ? 'left' : 'right']"
         :style="{ gridRow: index + 1 }"
@@ -26,15 +23,18 @@
             <span>{{ job.year }}</span>
           </div>
         </div>
-        
-        <!-- Conector horizontal hacia la línea central -->
-        <div :class="['connector-horizontal', index % 2 === 0 ? 'right' : 'left']"></div>
+
+        <div
+          :class="['connector-horizontal', index % 2 === 0 ? 'right' : 'left']"
+        ></div>
       </div>
-      
-      <!-- Modal para detalles del trabajo -->
+
       <div class="modal" v-if="selectedJob" @click="closeModal">
         <div class="modal-content" @click.stop>
-          <div class="modal-header" :style="{ backgroundColor: selectedJob.color }">
+          <div
+            class="modal-header"
+            :style="{ backgroundColor: selectedJob.color }"
+          >
             <h2>{{ selectedJob.company }}</h2>
             <div class="modal-close" @click="closeModal">&times;</div>
           </div>
@@ -50,10 +50,10 @@
 </template>
 
 <script>
-import TemplateSection from '@/components/TemplateSection.vue'
+import TemplateSection from "@/components/TemplateSection.vue";
 
 export default {
-  name: 'PersonalExperience',
+  name: "PersonalExperience",
   components: {
     TemplateSection,
   },
@@ -63,50 +63,50 @@ export default {
       selectedJob: null,
       jobs: [
         {
-          company: 'MO Technologies',
-          designation: 'Tech Lead',
-          period: 'Diciembre 2021 - Actual',
-          year: '2021',
-          description: 'Descripción de tu experiencia en MO Technologies...',
-          color: '#2d4e7c', // Primary color
-          showDialog: false
+          company: "MO Technologies",
+          designation: "Tech Lead",
+          period: "Diciembre 2021 - Actual",
+          year: "2021",
+          description: "Descripción de tu experiencia en MO Technologies...",
+          color: "#2d4e7c", // Primary color
+          showDialog: false,
         },
         {
-          company: 'MyTeamAbroad',
-          designation: 'Senior Developer',
-          period: 'Julio 2020 - Diciembre 2021',
-          year: '2020',
-          description: 'Descripción de tu experiencia en MyTeamAbroad...',
-          color: '#3a6299', // Slightly lighter primary
-          showDialog: false
+          company: "MyTeamAbroad",
+          designation: "Senior Developer",
+          period: "Julio 2020 - Diciembre 2021",
+          year: "2020",
+          description: "Descripción de tu experiencia en MyTeamAbroad...",
+          color: "#3a6299", // Slightly lighter primary
+          showDialog: false,
         },
         {
-          company: '789.mx',
-          designation: 'Developer',
-          period: 'Agosto 2019 - Noviembre 2019',
-          year: '2019',
-          description: 'Descripción de tu experiencia en 789.mx...',
-          color: '#4876b4', // Even lighter primary
-          showDialog: false
+          company: "789.mx",
+          designation: "Developer",
+          period: "Agosto 2019 - Noviembre 2019",
+          year: "2019",
+          description: "Descripción de tu experiencia en 789.mx...",
+          color: "#4876b4", // Even lighter primary
+          showDialog: false,
         },
         {
-          company: 'Jam IT Solucion',
-          designation: 'Junior Developer',
-          period: 'Junio 2017 - Agosto 2019',
-          year: '2017',
-          description: 'Descripción de tu experiencia en Jam IT Solucion...',
-          color: '#5a8ac9', // Lightest primary
-          showDialog: false
-        }
-      ]
-    }
+          company: "Jam IT Solucion",
+          designation: "Junior Developer",
+          period: "Junio 2017 - Agosto 2019",
+          year: "2017",
+          description: "Descripción de tu experiencia en Jam IT Solucion...",
+          color: "#5a8ac9", // Lightest primary
+          showDialog: false,
+        },
+      ],
+    };
   },
   mounted() {
     this.checkIfMobile();
-    window.addEventListener('resize', this.checkIfMobile);
+    window.addEventListener("resize", this.checkIfMobile);
   },
   beforeUnmount() {
-    window.removeEventListener('resize', this.checkIfMobile);
+    window.removeEventListener("resize", this.checkIfMobile);
   },
   methods: {
     checkIfMobile() {
@@ -114,14 +114,14 @@ export default {
     },
     openJobDetails(job) {
       this.selectedJob = job;
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     },
     closeModal() {
       this.selectedJob = null;
-      document.body.style.overflow = '';
-    }
-  }
-}
+      document.body.style.overflow = "";
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -139,7 +139,7 @@ export default {
 h1 {
   margin-bottom: 4rem;
   font-size: 2.5rem;
-  color: #2d4e7c; /* primaryColor */
+  color: #2d4e7c;
 }
 
 .timeline-grid {
@@ -150,23 +150,21 @@ h1 {
   position: relative;
   margin: 0 auto;
   padding-top: 2rem;
-  padding-bottom: 100px; /* Espacio adicional abajo */
+  padding-bottom: 100px;
   min-height: 500px;
-  justify-items: center; /* Centrar horizontalmente los elementos en cada celda */
-  align-items: start; /* Alinear al inicio verticalmente */
+  justify-items: center;
+  align-items: start;
 }
 
-/* Línea central vertical */
 .center-line {
   position: absolute;
   width: 4px;
-  height: 80%; /* Extender mucho más allá del contenido */
-  background-color: #bfae96; /* Color secundario */
+  height: 80%;
+  background-color: #bfae96;
   z-index: 1;
-  justify-self: center; /* Asegurar que esté centrada */
+  justify-self: center;
 }
 
-/* Punto al final de la línea */
 .end-dot {
   position: absolute;
   bottom: -10px;
@@ -174,14 +172,11 @@ h1 {
   transform: translateX(-50%);
   width: 20px;
   height: 20px;
-  background-color: #bfae96; /* Color secundario */
+  background-color: #bfae96;
   border-radius: 50%;
   z-index: 2;
 }
 
-
-
-/* Grid items */
 .grid-item {
   position: relative;
   z-index: 5;
@@ -203,8 +198,6 @@ h1 {
   padding-left: 30px;
 }
 
-
-
 .company-block {
   display: flex;
   width: 300px;
@@ -214,7 +207,9 @@ h1 {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   position: relative;
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .company-block:hover {
@@ -257,10 +252,9 @@ h1 {
   box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.3);
 }
 
-/* Conectores horizontales */
 .connector-horizontal {
   position: absolute;
-  background-color: #bfae96; /* Color secundario */
+  background-color: #bfae96;
   height: 3px;
   top: 50px;
   z-index: -1;
@@ -275,11 +269,9 @@ h1 {
   left: -15px;
 }
 
-
-
 .dialog h3 {
   margin-top: 0;
-  color: #bfae96; /* Secondary color */
+  color: #bfae96;
   font-size: 1.2rem;
 }
 
@@ -303,11 +295,11 @@ h1 {
     grid-template-rows: repeat(4, 1fr);
     gap: 8px;
     padding-top: 0;
-    padding-bottom: 30px; /* Espacio para el punto final */
+    padding-bottom: 30px;
     width: 100%;
     position: relative;
   }
-  
+
   .center-line {
     position: absolute;
     left: 50%;
@@ -317,7 +309,7 @@ h1 {
     top: 0;
     width: 4px;
   }
-  
+
   .grid-item.left,
   .grid-item.right {
     grid-column: 1;
@@ -329,7 +321,7 @@ h1 {
     width: 100%;
     display: flex;
   }
-  
+
   .connector-horizontal.right,
   .connector-horizontal.left {
     width: 100px;
@@ -337,17 +329,17 @@ h1 {
     right: auto;
     z-index: -1;
   }
-  
+
   .company-block {
     width: 280px;
     position: relative;
     margin: 0 auto;
   }
+
   .connector-horizontal {
     display: none;
   }
-  
-  /* Asegurar que el punto final esté centrado en móvil */
+
   .end-dot {
     left: 50%;
     transform: translateX(-50%);
@@ -355,7 +347,6 @@ h1 {
   }
 }
 
-/* Estilos para el modal */
 .modal {
   position: fixed;
   top: 0;
@@ -381,8 +372,15 @@ h1 {
 }
 
 @keyframes modalFadeIn {
-  from { opacity: 0; transform: translateY(50px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .modal-header {
