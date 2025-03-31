@@ -1,6 +1,6 @@
 <template>
   <TemplateSection class="experience-container">
-    <h1>Mi Experiencia Profesional</h1>
+    <h1 class="section-title">Experiencia Profesional</h1>
 
     <div class="timeline-grid">
       <div class="center-line">
@@ -66,8 +66,8 @@ export default {
           company: "MO Technologies",
           designation: "Tech Lead",
           period: "Diciembre 2021 - Actual",
-          year: "2021",
-          description: "Descripción de tu experiencia en MO Technologies...",
+          year: "Actual",
+          description: "Tech lead encargado de desplegar y mantener features del core crediticio de la empresa, ademas de asegurar la arquitectura y buenas practicas del core utilizando domain driven design.",
           color: "#2d4e7c", // Primary color
           showDialog: false,
         },
@@ -75,17 +75,17 @@ export default {
           company: "MyTeamAbroad",
           designation: "Senior Developer",
           period: "Julio 2020 - Diciembre 2021",
-          year: "2020",
-          description: "Descripción de tu experiencia en MyTeamAbroad...",
+          year: "2021",
+          description: "Parte del departamento de Innovación para cliente en el sector de automoción, desarrollando soluciones con algoritmos de aprendizaje automatico.",
           color: "#3a6299", // Slightly lighter primary
           showDialog: false,
         },
         {
           company: "789.mx",
-          designation: "Developer",
+          designation: "Mid Developer",
           period: "Agosto 2019 - Noviembre 2019",
           year: "2019",
-          description: "Descripción de tu experiencia en 789.mx...",
+          description: "Se desarrollaron módulos para empresas de transporte en Laravel y páginas de seguros con Vue.",
           color: "#4876b4", // Even lighter primary
           showDialog: false,
         },
@@ -93,8 +93,8 @@ export default {
           company: "Jam IT Solucion",
           designation: "Junior Developer",
           period: "Junio 2017 - Agosto 2019",
-          year: "2017",
-          description: "Descripción de tu experiencia en Jam IT Solucion...",
+          year: "2019",
+          description: "Se desarrollaron módulos para un ERP y un sistema de gestión de citas para un spa clínico, ambos en Laravel.",
           color: "#5a8ac9", // Lightest primary
           showDialog: false,
         },
@@ -136,17 +136,19 @@ export default {
   min-height: 100vh;
 }
 
-h1 {
+.section-title {
   margin-bottom: 4rem;
   font-size: 2.5rem;
-  color: #2d4e7c;
+  color: var(--secondary-color);
+  text-align: center;
+  width: 100%;
 }
 
 .timeline-grid {
   display: grid;
   grid-template-columns: 1fr 30px 1fr;
-  width: 90%;
-  max-width: 1000px;
+  width: 80%;
+  max-width: 700px;
   position: relative;
   margin: 0 auto;
   padding-top: 2rem;
@@ -269,21 +271,16 @@ h1 {
   left: -15px;
 }
 
-.dialog h3 {
-  margin-top: 0;
-  color: #bfae96;
-  font-size: 1.2rem;
-}
 
 .period {
   font-style: italic;
-  font-size: 0.9rem;
+  font-size: 1.3rem;
   margin-bottom: 10px;
   color: #fff;
 }
 
 .description {
-  font-size: 0.9rem;
+  font-size: 1.3rem;
   line-height: 1.4;
   color: #fff;
 }
@@ -343,7 +340,7 @@ h1 {
   .end-dot {
     left: 50%;
     transform: translateX(-50%);
-    bottom: -25px;
+    bottom: -20px;
   }
 }
 
@@ -412,6 +409,6 @@ h1 {
 .modal-body h3 {
   margin-top: 0;
   color: #bfae96;
-  font-size: 1.2rem;
+  font-size: 2rem;
 }
 </style>
