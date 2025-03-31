@@ -1,57 +1,37 @@
 <template>
   <TemplateSection class="experience-container">
     <h1>Mi Experiencia Profesional</h1>
-    <div class="timeline">
+    
+    <!-- Timeline con Grid -->
+    <div class="timeline-grid">
       <!-- Línea central vertical -->
-      <div class="center-line"></div>
-      
-      <!-- Columna izquierda (items impares) -->
-      <div class="column left-column">
-        <div 
-          v-for="(job, index) in jobs.filter((_, i) => i % 2 === 0)" 
-          :key="index" 
-          class="timeline-item left"
-          :style="{ marginTop: index > 0 ? '180px' : '0' }"
-          @click="openJobDetails(job)"
-        >
-          <div class="company-block" :style="{ backgroundColor: job.color }">
-            <div class="company-info">
-              <div class="company-name">{{ job.company }}</div>
-              <div class="designation">{{ job.designation }}</div>
-            </div>
-            <div class="year-circle">
-              <span>{{ job.year }}</span>
-            </div>
-          </div>
-          
-          <!-- Conector horizontal hacia la línea central -->
-          <div class="connector-horizontal right"></div>
-        </div>
+      <div class="center-line">
+        <div class="end-dot"></div>
       </div>
       
-      <!-- Columna derecha (items pares) -->
-      <div class="column right-column">
-        <div 
-          v-for="(job, index) in jobs.filter((_, i) => i % 2 === 1)" 
-          :key="index" 
-          class="timeline-item right"
-          :style="{ marginTop: index === 0 ? '90px' : '180px' }"
-          @click="openJobDetails(job)"
-        >
-          <div class="company-block" :style="{ backgroundColor: job.color }">
-            <div class="company-info">
-              <div class="company-name">{{ job.company }}</div>
-              <div class="designation">{{ job.designation }}</div>
-            </div>
-            <div class="year-circle">
-              <span>{{ job.year }}</span>
-            </div>
+      <!-- Elementos de la timeline en grid -->
+      <div 
+        v-for="(job, index) in jobs" 
+        :key="index"
+        :class="['grid-item', index % 2 === 0 ? 'left' : 'right']"
+        :style="{ gridRow: index + 1 }"
+        @click="openJobDetails(job)"
+      >
+        <div class="company-block" :style="{ backgroundColor: job.color }">
+          <div class="company-info">
+            <div class="company-name">{{ job.company }}</div>
+            <div class="designation">{{ job.designation }}</div>
           </div>
-          
-          <div class="connector-horizontal left"></div>
+          <div class="year-circle">
+            <span>{{ job.year }}</span>
+          </div>
         </div>
+        
+        <!-- Conector horizontal hacia la línea central -->
+        <div :class="['connector-horizontal', index % 2 === 0 ? 'right' : 'left']"></div>
       </div>
       
+      <!-- Modal para detalles del trabajo -->
       <div class="modal" v-if="selectedJob" @click="closeModal">
         <div class="modal-content" @click.stop>
           <div class="modal-header" :style="{ backgroundColor: selectedJob.color }">
@@ -65,7 +45,6 @@
           </div>
         </div>
       </div>
-
     </div>
   </TemplateSection>
 </template>
@@ -163,31 +142,34 @@ h1 {
   color: #2d4e7c; /* primaryColor */
 }
 
-.timeline {
-  display: flex;
+.timeline-grid {
+  display: grid;
+  grid-template-columns: 1fr 30px 1fr;
   width: 90%;
   max-width: 1000px;
   position: relative;
   margin: 0 auto;
   padding-top: 2rem;
-  min-height: 800px;
+  padding-bottom: 100px; /* Espacio adicional abajo */
+  min-height: 500px;
+  justify-items: center; /* Centrar horizontalmente los elementos en cada celda */
+  align-items: start; /* Alinear al inicio verticalmente */
 }
 
 /* Línea central vertical */
 .center-line {
   position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
   width: 4px;
-  height: 100%;
+  height: 80%; /* Extender mucho más allá del contenido */
   background-color: #bfae96; /* Color secundario */
   z-index: 1;
+  justify-self: center; /* Asegurar que esté centrada */
 }
 
-/* Círculos en la línea central */
-.center-dot {
+/* Punto al final de la línea */
+.end-dot {
   position: absolute;
+  bottom: -10px;
   left: 50%;
   transform: translateX(-50%);
   width: 20px;
@@ -197,41 +179,31 @@ h1 {
   z-index: 2;
 }
 
-/* Columnas */
-.column {
-  width: 50%;
+
+
+/* Grid items */
+.grid-item {
   position: relative;
-  padding: 0 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Centrar horizontalmente en PC */
-}
-
-.left-column {
-  padding-right: 40px;
-  align-items: flex-end; /* Alinear a la derecha */
-}
-
-.right-column {
-  padding-left: 40px;
-  align-items: flex-start; /* Alinear a la izquierda */
-}
-
-/* Items del timeline */
-.timeline-item {
-  position: relative;
-  z-index: 1;
+  z-index: 5;
   width: 100%;
   display: flex;
 }
 
-.timeline-item.left {
-  justify-content: flex-end;
+.grid-item.left {
+  grid-column: 1;
+  justify-self: end;
+  justify-content: center;
+  padding-right: 30px;
 }
 
-.timeline-item.right {
-  justify-content: flex-start;
+.grid-item.right {
+  grid-column: 3;
+  justify-self: start;
+  justify-content: center;
+  padding-left: 30px;
 }
+
+
 
 .company-block {
   display: flex;
@@ -291,17 +263,16 @@ h1 {
   background-color: #bfae96; /* Color secundario */
   height: 3px;
   top: 50px;
-  z-index: 0;
+  z-index: -1;
+  width: 50%;
 }
 
 .connector-horizontal.right {
-  width: 40px;
-  right: -40px;
+  right: -15px;
 }
 
 .connector-horizontal.left {
-  width: 40px;
-  left: -40px;
+  left: -15px;
 }
 
 
@@ -326,54 +297,62 @@ h1 {
 }
 
 @media (max-width: 768px) {
-  .timeline {
+  .timeline-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 8px;
+    padding-top: 0;
+    padding-bottom: 30px; /* Espacio para el punto final */
     width: 100%;
-    flex-direction: column;
-  }
-  
-  .column {
-    width: 100%;
-    padding: 0;
-    align-items: flex-start; /* Alinear a la izquierda en móvil */
-  }
-  
-  .left-column,
-  .right-column {
-    padding: 0 0 0 60px; /* Espacio para la línea vertical */
+    position: relative;
   }
   
   .center-line {
-    left: 30px;
-    height: calc(100% - 50px);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    height: 100%;
+    top: 0;
+    width: 4px;
   }
   
-  .center-dot {
-    left: 30px;
-  }
-  
-  .timeline-item.left,
-  .timeline-item.right {
-    justify-content: flex-start;
-    margin-top: 0 !important; /* Anular el escalonamiento en móviles */
-    margin-bottom: 4rem;
-  }
-  
-  .company-block {
-    width: 280px;
+  .grid-item.left,
+  .grid-item.right {
+    grid-column: 1;
+    justify-self: center;
+    margin-bottom: 20px;
+    padding-left: 0;
+    padding-right: 0;
+    justify-content: center;
+    width: 100%;
+    display: flex;
   }
   
   .connector-horizontal.right,
   .connector-horizontal.left {
-    width: 30px;
+    width: 100px;
     left: -30px;
+    right: auto;
+    z-index: -1;
   }
-  
-
   
   .company-block {
+    width: 280px;
     position: relative;
+    margin: 0 auto;
   }
-
+  .connector-horizontal {
+    display: none;
+  }
+  
+  /* Asegurar que el punto final esté centrado en móvil */
+  .end-dot {
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -25px;
+  }
 }
 
 /* Estilos para el modal */
